@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FormsController::class, 'index']);
+Route::resource('forms', FormsController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\FormsController::class, 'index'])->name('dashboard');
