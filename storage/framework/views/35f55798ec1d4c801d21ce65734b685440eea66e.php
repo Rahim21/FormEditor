@@ -14,7 +14,9 @@
 			<span class="status-type">Total des formulaires</span>
 		</div>
 	</div>
-	<p>Pagination ...</p>
+	<!-- Pagination Bootstrap -->
+	<?php echo e($formsList->links()); ?>
+
 	<div class="view-actions">
 		<button class="view-btn list-view" title="List View">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
@@ -65,7 +67,11 @@
 			</div>
 			<div class="project-box-footer" style="color: whitesmoke">
 				<div class="participants">
-					<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="participant">
+					<?php if(Auth::user()->profile_photo_path == NULL): ?>
+					<img src="https://via.placeholder.com/600" alt="participant" id="participant">
+					<?php else: ?>
+					<img src=" <?php echo e(Auth::user()->profile_photo_path); ?> " alt="participant" id="participant">
+          			<?php endif; ?>
 				</div>
 				<div class="days-left" style="color: #ffffff;">
 					<?php echo e(__(' Maintenant ')); ?>
@@ -85,7 +91,7 @@
 	
 	<?php $__currentLoopData = $formsList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $forms): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 	<div class="project-box-wrapper">
-		<div class="project-box" style="background-color: #cbebfe;">
+		<div class="project-box" style="background-color: #29b0ff8a;">
 			<div class="project-box-header">
 				<span><?php echo e($forms->user->firstname); ?>
 
@@ -95,7 +101,7 @@
 					<button class="project-btn-more">
           
             <!-- Right Side Of Navbar -->
-<ul class="navbar-nav ml-auto">
+<ul class="navbar navbar-nav ml-auto">
   <!-- Authentication Links -->
   <?php if(auth()->guard()->guest()): ?>
   <li class="nav-item dropdown">
@@ -107,9 +113,9 @@
       </svg>
     </a>
 
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="<?php echo e(route('forms.show', $forms->id)); ?>"> Consulter </a>
-    </div>    
+    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="<?php echo e(route('forms.show', $forms->id)); ?>"> <i class="bi bi-eye"></i> Consulter </a>
+    </ul>    
   </li>
   <?php else: ?>
   <li class="nav-item dropdown">
@@ -121,20 +127,20 @@
       </svg>
     </a>
 
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
       
-      <a class="dropdown-item" href="<?php echo e(route('forms.show', $forms->id)); ?>"> Consulter </a>
+      <a class="dropdown-item" href="<?php echo e(route('forms.show', $forms->id)); ?>"> <i class="bi bi-eye"></i> Consulter </a>
 
-      <a class="dropdown-item" href="<?php echo e(route('forms.edit', $forms->id)); ?>"> Editer </a>
+      <a class="dropdown-item" href="<?php echo e(route('forms.edit', $forms->id)); ?>"> <i class="bi bi-pen"></i> Editer </a>
 
       <a class="dropdown-item" href="#" onclick="event.preventDefault();
-      document.getElementById('delete-form').submit();"> Supprimer </a>
+      document.getElementById('delete-form').submit();"> <i class="bi bi-trash"></i> Supprimer </a>
 
       <form id="delete-form" action="<?php echo e(route('forms.destroy', $forms->id)); ?>" method="POST" class="d-none">
         <?php echo method_field('DELETE'); ?>
         <?php echo csrf_field(); ?>
       </form>
-    </div>
+    </ul>
 
     
   </li>
@@ -162,8 +168,13 @@
 			</div>
 			<div class="project-box-footer">
 				<div class="participants">
-					<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2550&amp;q=80" alt="participant">
-					<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=900&amp;q=60" alt="participant">
+					<?php if($forms->user->profile_photo_path == NULL): ?>
+					<img src="https://via.placeholder.com/600" alt="participant" id="participant">
+					<?php else: ?>
+					<img src=" <?php echo e($forms->user->profile_photo_path); ?> " alt="participant" id="participant">
+          			<?php endif; ?>
+
+					<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=900&amp;q=60" alt="participant" id="participant">
 					<button class="add-participant" style="color: #29b0ff;">
 						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
 							<path d="M12 5v14M5 12h14"></path>
@@ -179,6 +190,10 @@
 	</div>
 	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
-
+<style>
+	/* a.dropdown-item:hover{
+		background-color: mettre un root puis laisser le choix au user dans le form pour la couleur;
+	} */
+</style>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/haya0002/public_html/FormEditor/resources/views/forms/list.blade.php ENDPATH**/ ?>

@@ -19,14 +19,16 @@ class FormsController extends Controller
     public function index()
     {
         if (!Auth::check()) {
-            $formsList = Forms::orderBy('date', 'desc')->take(9)->get();
+            //$formsList = Forms::orderBy('date', 'desc')->take(9)->get();
+            $formsList = Forms::orderBy('date', 'desc')->paginate(9);
 
             $rowForms = DB::table("forms")->where('deleted_at', NULL)->get();
             $countForms = count($rowForms);
             return view('forms.list', ['formsList' => $formsList, 'countForms' => $countForms]);
         }
         /* ----- Récupère x formulaire ordre du plus récent ----- */
-        $formsList = Forms::orderBy('date', 'desc')->take(8)->get();
+        // $formsList = Forms::orderBy('date', 'desc')->take(8)->get();
+        $formsList = Forms::orderBy('date', 'desc')->paginate(8);
 
         /* ----- Visualiser les formulaires qui sont soft-delete ----- */
         //$formsList = Forms::withTrashed()->get();

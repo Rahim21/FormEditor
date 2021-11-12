@@ -561,6 +561,11 @@ pre code {
   .container-lg, .container-md, .container-sm, .container {
     max-width: 960px;
   }
+  	.navbar .nav-item .dropdown-menu{ display: none!important; }
+	/* .navbar .nav-item:hover .nav-link{  } */
+	.navbar .nav-item:hover .dropdown-menu{ display: block!important; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0!important; }
+  .dropdown-menu{position: absolute!important;}
 }
 @media (min-width: 1200px) {
   .container-xl, .container-lg, .container-md, .container-sm, .container {

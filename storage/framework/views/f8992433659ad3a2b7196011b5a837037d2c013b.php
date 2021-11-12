@@ -29,6 +29,9 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href=" <?php echo e(asset('logo/FormEditor.png')); ?> "/>
     <link rel="shortcut icon" type="image/x-icon" href=" <?php echo e(asset('favicon.ico')); ?> "/>
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -67,10 +70,14 @@
         </button>
         <button class="profile-btn">
           <?php if(auth()->guard()->check()): ?>
-          <img src="https://via.placeholder.com/1000" />
+          <?php if(Auth::user()->profile_photo_path == NULL): ?>
+          <img src="https://via.placeholder.com/600" />
+          <?php else: ?>
+          <img src=" <?php echo e(Auth::user()->profile_photo_path); ?> " />
+          <?php endif; ?>
           <?php endif; ?>
           <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <?php if(auth()->guard()->guest()): ?>
                             <li class="nav-item dropdown">
@@ -94,9 +101,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                                  
+                                  <a class="dropdown-item" href="#">
+                                  <i class="bi bi-gear"></i>
+                                  <?php echo e(__("Paramètre")); ?>
+
+                                </a>
+                                
+                                  <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        <i class="bi bi-box-arrow-in-right"></i>
                                         <?php echo e(__('Logout')); ?>
 
                                     </a>

@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
         	'email_verified_at' => now(),
         	'password' => bcrypt('password'),
         	'remember_token' => '',
+            'profile_photo_path' => 'https://miro.medium.com/max/600/0*HVf99uME8t1T1VbA.gif',
         ]);
         User::create([
         	'firstname' => 'Sami',

@@ -29,6 +29,9 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href=" {{ asset('logo/FormEditor.png') }} "/>
     <link rel="shortcut icon" type="image/x-icon" href=" {{ asset('favicon.ico') }} "/>
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
 <body>
 
@@ -67,10 +70,14 @@
         </button>
         <button class="profile-btn">
           @auth
-          <img src="https://via.placeholder.com/1000" />
+          @if (Auth::user()->profile_photo_path == NULL)
+          <img src="https://via.placeholder.com/600" />
+          @else
+          <img src=" {{ Auth::user()->profile_photo_path }} " />
+          @endif
           @endauth
           <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item dropdown">
@@ -94,9 +101,16 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                  
+                                  <a class="dropdown-item" href="#">
+                                  <i class="bi bi-gear"></i>
+                                  {{ __("Paramètre") }}
+                                </a>
+                                
+                                  <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                        <i class="bi bi-box-arrow-in-right"></i>
                                         {{ __('Logout') }}
                                     </a>
 
