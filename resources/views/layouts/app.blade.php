@@ -71,7 +71,7 @@
         <button class="profile-btn">
           @auth
           @if (Auth::user()->profile_photo_path == NULL)
-          <img src="https://via.placeholder.com/600" />
+          <img src="{{ asset(array_rand(['logo/defaut1.png'=>0, 'logo/defaut2.png'=>1], 1)) }}" />
           @else
           <img src=" {{ Auth::user()->profile_photo_path }} " />
           @endif
@@ -157,7 +157,7 @@
       <div class="projects-section shadow-lg">
         <div class="projects-section-header">
           <p>@yield('content-title')</p>
-          @auth<p class="time"> {{ Auth::user()->firstname }} </p>@endauth
+          @yield('pagination')
         </div>
         @yield('content')
       </div>

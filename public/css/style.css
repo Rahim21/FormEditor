@@ -4,6 +4,7 @@
 .badge#role {
     margin-left: 5px!important;
     color: var(--link-color-active)!important;
+    border-style: solid;
 }
 svg#resize {
   width: 50px;
@@ -559,7 +560,7 @@ border: 1px solid var(--secondary-color);
 }
 .project-box-header span {
   color: #4A4A4A;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   font-size: 14px;
   line-height: 16px;
 }
@@ -676,8 +677,10 @@ object-fit: cover;
 margin-left: -6px;
 }
 
+/* Logo auteur du formulaire */
 img#participant {
   box-shadow: 0px 0px 0px 2px white!important;
+  z-index: 1;
 }
 
 .add-participant {
@@ -887,9 +890,35 @@ display: none;
 
 
 
+/* Icon */
 i.bi {
   position: relative;
   left: 0px;
   margin-right: 10px;
   float: left;
+}
+/* SVG Couronne */
+svg#crown {
+  position: relative;
+  width: 20px;
+  top: -14px;
+  left: 14px;
+}
+/* Pagination */
+.page-link{
+  color: #1f1c2e!important;
+}
+.page-link:hover{
+  color: var(--main-color)!important;
+}
+.page-item.active .page-link{
+  background-color: var(--link-color-active-bg)!important;
+  border-color: var(--main-color)!important;
+  color: var(--app-container)!important;
+}
+
+
+/* temporaire, supprimer après avoir le design du login & logout*/
+.form-group.row{
+  margin:auto;
 }

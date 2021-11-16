@@ -7,6 +7,7 @@ use App\Models\Forms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreFormsRequest;
 
 class FormsController extends Controller
@@ -96,6 +97,9 @@ class FormsController extends Controller
     {
         if (!Auth::check()) {
             return redirect('login');
+        }
+        if (!Gate::allows('form-access', $form = Forms::findOrFail($id))) {
+            abort('403');
         }
         return view('forms.edit', ['forms' => Forms::findOrFail($id)]);
     }

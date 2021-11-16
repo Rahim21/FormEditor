@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Forms extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+	use HasFactory;
+	use SoftDeletes;
 
 	protected $fillable = [
 		'title',
 		'message',
 		'date',
-		'user_id'
+		'color',
+		'user_id',
 	];
 
 	protected $dates = [
@@ -25,7 +26,7 @@ class Forms extends Model
 		'update_at'
 	];
 
-    public function user()
+	public function user()
 	{
 		return $this->belongsTo(User::class);
 	}

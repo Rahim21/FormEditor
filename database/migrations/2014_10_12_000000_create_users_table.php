@@ -25,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateFormsTable extends Migration
             $table->string('title', 100);
             $table->text('message');
             $table->datetime('date');
+            $table->string('color');
             $table->softDeletes();
             $table->timestamps();
         });

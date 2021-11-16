@@ -26,7 +26,8 @@ class StoreFormsRequest extends FormRequest
         return [
             'title' => ['required', 'max:100'],
             'message' => ['required'],
-            'date' => ['required', 'date']
+            'date' => ['required', 'date'],
+            'color' => ['nullable']
         ];
     }
 
@@ -35,7 +36,8 @@ class StoreFormsRequest extends FormRequest
         return [
             'title' => 'titre',
             'message' => 'message',
-            'date' => 'date'
+            'date' => 'date',
+            'color' => 'color'
         ];
     }
 
