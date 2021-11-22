@@ -48,7 +48,7 @@
 	
 	<div class="project-box-wrapper">
 	<a href="<?php echo e(route('forms.create')); ?>" id="addform">
-		<div class="project-box" style="background-color: #1f1c2e;">
+		<div class="project-box border-fade" style="background-color: #1f1c2e;">
 			<div class="project-box-header">
 				<span> <?php echo e(Auth::user()->firstname); ?>
 
@@ -124,7 +124,7 @@
 
 	
 	<?php $__currentLoopData = $formsList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $forms): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-	<div class="project-box-wrapper">
+	<div class="project-box-wrapper curl-top-left">
 		<div class="project-box" style="background-color: <?php echo e($forms->color); ?>8a;">
 			<div class="project-box-header">
 				<span><?php echo e($forms->user->firstname); ?>

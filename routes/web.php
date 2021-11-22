@@ -15,6 +15,9 @@ use App\Http\Controllers\FormsController;
 |
 */
 
+Route::fallback(function () {
+    return view('error');
+});
 Route::get('/', [FormsController::class, 'index']);
 Route::resource('forms', FormsController::class);
 

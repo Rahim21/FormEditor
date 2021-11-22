@@ -57,7 +57,7 @@ unset($__errorArgs, $__bag); ?>" name="date" id="date" placeholder="Saisir la da
   </div>
 
   <label for="exampleColorInput" class="form-label">Veuillez selectionner une couleur pour votre formulaire</label>
-  <input type="color" name="color" class="form-control form-control-color" id="exampleColorInput" value="#29b0ff" title="Veuillez choisir une couleur">
+  <input type="color" name="color" class="form-control form-control-color" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
 
   <div class="mb-3">
     <div class="offset-sm-2 col-sm-10">

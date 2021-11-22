@@ -48,7 +48,7 @@
 	{{-- Création d'un formulaire --}}
 	<div class="project-box-wrapper">
 	<a href="{{ route('forms.create') }}" id="addform">
-		<div class="project-box" style="background-color: #1f1c2e;">
+		<div class="project-box border-fade" style="background-color: #1f1c2e;">
 			<div class="project-box-header">
 				<span> {{ Auth::user()->firstname }}
 				<div class="badge" id="role" style="background-color: @foreach(Auth::user()->role as $role) {{ $role->role_couleur }} @endforeach;"> @foreach(Auth::user()->role as $role) {{ $role->role_nom }} @endforeach </div>
@@ -122,7 +122,7 @@
 
 	{{-- Liste des formulaires --}}
 	@foreach($formsList as $forms)
-	<div class="project-box-wrapper">
+	<div class="project-box-wrapper curl-top-left">
 		<div class="project-box" style="background-color: {{ $forms->color }}8a;">
 			<div class="project-box-header">
 				<span>{{ $forms->user->firstname }}

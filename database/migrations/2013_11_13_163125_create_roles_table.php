@@ -25,9 +25,10 @@ class CreateRolesTable extends Migration
     private function ajouterRoleDefaut()
     {
         $this->insererRoleDB(1, 'Admin', '#161616');
-        $this->insererRoleDB(2, 'Etudiant', '#0080ff ');
-        $this->insererRoleDB(3, 'Professionel', '#00ff4c');
-        $this->insererRoleDB(4, 'Particulier', '#ffa600');
+        $this->insererRoleDB(2, 'Modérateur', '#d64036');
+        $this->insererRoleDB(3, 'Etudiant', '#0080ff ');
+        $this->insererRoleDB(4, 'Professionnel', '#00ff4c');
+        $this->insererRoleDB(5, 'Particulier', '#ffa600');
     }
 
     private function insererRoleDB(int $id, string $role_nom, string $role_couleur)

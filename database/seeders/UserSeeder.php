@@ -33,6 +33,17 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
             'remember_token' => '',
+            'profile_photo_path' => 'https://data.whicdn.com/images/331952976/original.gif',
+            'role_id' => 2,
+        ]);
+        User::create([
+            'firstname' => 'Chuck',
+            'lastname' => 'NORRIS',
+            'email' => 'chuck.norris@toto.fr',
+            'email_verified_at' => now(),
+            'password' => bcrypt('totototo'),
+            'remember_token' => '',
+            'profile_photo_path' => 'https://thumbs.gfycat.com/InfamousYawningHorseshoecrab-size_restricted.gif',
             'role_id' => 1,
         ]);
         User::factory()->count(10)->create();

@@ -15,6 +15,6 @@ class FormsSeeder extends Seeder
      */
     public function run()
     {
-        Forms::factory()->count(15)->create();
+        Forms::factory()->count(30)->create();
     }
 }
