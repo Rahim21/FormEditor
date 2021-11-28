@@ -6,6 +6,7 @@ use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +19,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,10 +27,12 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'firstname',
         'lastname',
+        'firstname',
         'email',
         'password',
+        'current_team_id',
+        'profile_photo_path',
         'role_id',
     ];
 
@@ -63,6 +67,13 @@ class User extends Authenticatable
         'role_id',
     ];
 
+    protected $dates = [
+        'created_at',
+        'deleted_at',
+        'started_at',
+        'update_at'
+    ];
+
     public function forms()
     {
         return $this->hasMany(Forms::class);
@@ -70,7 +81,22 @@ class User extends Authenticatable
 
     public function role()
     {
-        // return $this->hasOne('App\Models\Role', 'id', 'role_id');
-        return $this->hasMany(Role::class, 'id', 'role_id');
+        //return $this->hasMany(Role::class, 'id', 'role_id');
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    // public function __construct(array $attributes = [])
+    // {
+    //     parent::__construct($attributes);
+    //     self::created(function (User $user) {
+    //         if (!$user->role()->get()->contains(2)) {
+    //             $user->role()->attach(3);
+    //         }
+    //     });
+    // }
 }

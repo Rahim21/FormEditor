@@ -15,7 +15,7 @@ class AddUserToForms extends Migration
     {
         Schema::table('forms', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,7 @@ class AddUserToForms extends Migration
     public function down()
     {
         Schema::table('forms', function (Blueprint $table) {
-            $table->dropForeign('user_id');
+            $table->dropForeign('user_id')->onDelete('cascade');
         });
     }
 }

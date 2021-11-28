@@ -51,7 +51,7 @@
 		<div class="project-box border-fade" style="background-color: #1f1c2e;">
 			<div class="project-box-header">
 				<span> {{ Auth::user()->firstname }}
-				<div class="badge" id="role" style="background-color: @foreach(Auth::user()->role as $role) {{ $role->role_couleur }} @endforeach;"> @foreach(Auth::user()->role as $role) {{ $role->role_nom }} @endforeach </div>
+				<div class="badge" id="role" style="background-color: {{ Auth::user()->role->role_couleur }};"> {{ Auth::user()->role->role_nom }} </div>
 				</span>
 			</div>
 			<div class="project-box-content-header">
@@ -126,7 +126,7 @@
 		<div class="project-box" style="background-color: {{ $forms->color }}8a;">
 			<div class="project-box-header">
 				<span>{{ $forms->user->firstname }}
-				<div class="badge" id="role" style="background-color: @foreach($forms->user->role as $role) {{ $role->role_couleur }} @endforeach;"> @foreach($forms->user->role as $role) {{ $role->role_nom }} @endforeach </div>
+				<div class="badge" id="role" style="background-color: {{ $forms->user->role->role_couleur }} ;"> {{ $forms->user->role->role_nom }} </div>
 				</span>
 				<div class="more-wrapper">
 					<button class="project-btn-more">
@@ -165,9 +165,9 @@
       <a class="dropdown-item" href="{{ route('forms.edit', $forms->id) }}"> <i class="bi bi-pen"></i> Editer </a>
 
       <a class="dropdown-item" href="#" onclick="event.preventDefault();
-      document.getElementById('delete-form').submit();"> <i class="bi bi-trash"></i> Supprimer </a>
+      document.getElementById('delete-form{{$forms->id}}').submit();"> <i class="bi bi-trash"></i> Supprimer </a>
 
-      <form id="delete-form" action="{{ route('forms.destroy', $forms->id) }}" method="POST" class="d-none">
+      <form id="delete-form{{$forms->id}}" action="{{ route('forms.destroy', $forms->id) }}" method="POST" class="d-none">
         @method('DELETE')
         @csrf
       </form>

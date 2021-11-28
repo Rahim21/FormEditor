@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormsController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,10 @@ Route::fallback(function () {
     return view('error');
 });
 Route::get('/', [FormsController::class, 'index']);
-Route::resource('forms', FormsController::class);
-
+Route::resource('forms', FormsController::class)->middleware('auth');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\FormsController::class, 'index'])->name('dashboard');
+
+//Route::get('/admin', [AdminController::class, 'index']);
+// Route::resource('admin', AdminController::class)->middleware('isAdmin');
+Route::resource('admin', AdminController::class)->middleware(['isAdmin', 'auth']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware('isAdmin');

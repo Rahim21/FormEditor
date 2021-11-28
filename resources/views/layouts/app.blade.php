@@ -50,13 +50,19 @@
         </div>
       </div>
       <div class="app-header-right">
+        @auth
+          @if (Auth::user()->role_id ==1 || Auth::user()->role_id ==2)
+              <a href="{{ url('admin') }}" id="admin">{{ Auth::user()->role->role_nom }}</a>
+          @endif
+        @endauth
         <button class="mode-switch" title="Switch Theme">
           <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
             <defs></defs>
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
           </svg>
         </button>
-        <button class="add-btn" title="Add New Project">
+
+        {{-- <button class="add-btn" title="Add New Project">
           <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
             <line x1="12" y1="5" x2="12" y2="19" />
             <line x1="5" y1="12" x2="19" y2="12" />
@@ -67,7 +73,8 @@
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
             <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
-        </button>
+        </button> --}}
+
         <button class="profile-btn">
           @auth
           @if (Auth::user()->profile_photo_path == NULL)
@@ -87,10 +94,16 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (Route::has('login'))
-                                      <a class="dropdown-item" href="{{ route('login') }}">{{ __("Se Connecter") }}</a>
+                                      <a class="dropdown-item" href="{{ route('login') }}">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                        {{ __("Se Connecter") }}
+                                      </a>
                                     @endif
                                     @if (Route::has('register'))
-                                      <a class="dropdown-item" href="{{ route('register') }}">{{ __("S'Inscrire") }}</a>
+                                      <a class="dropdown-item" href="{{ route('register') }}">
+                                        <i class="bi bi-plus-square"></i>
+                                        {{ __("S'Inscrire") }}
+                                      </a>
                                     @endif
                                 </div>
                             </li>
@@ -102,10 +115,15 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                   
+                                  <a class="dropdown-item" style="background-color: {{Auth::user()->role->role_couleur.'8a'}}">
+                                  <i class="bi bi-patch-check"></i>
+                                  {{ Auth::user()->role->role_nom }}
+                                  </a>
+
                                   <a class="dropdown-item" href="#">
                                   <i class="bi bi-gear"></i>
                                   {{ __("Paramètre") }}
-                                </a>
+                                  </a>
                                 
                                   <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -153,6 +171,11 @@
             <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
           </svg>
         </a>
+        {{-- <a href="#" id="admin" class="app-sidebar-link mon-shadow">
+          <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
+            
+          </svg>
+        </a> --}}
       </div>
       <div class="projects-section mon-shadow">
         <div class="projects-section-header">

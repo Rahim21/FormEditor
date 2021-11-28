@@ -31,7 +31,7 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forms');
+        // Schema::dropIfExists('forms');
         Schema::table('forms', function (Blueprint $table) {
             $table->dropColumn('deleted_at');
         });

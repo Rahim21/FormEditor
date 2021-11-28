@@ -26,10 +26,25 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('form-access', function ($user, $form) {
-            if ($user->role_id === 1) {
+            if ($user->role_id === 1 || $user->role_id === 2) {
                 return 1;
             }
             return $user->id === $form->user_id;
+        });
+
+        Gate::define('user-access', function ($user, $userRoleID) {
+            if ($user->role_id === 1) {
+                if ($userRoleID >= 2 && $userRoleID <= 5) {
+                    return 1;
+                }
+                return 0;
+            } else if ($user->role_id === 2) {
+                if ($userRoleID >= 3 && $userRoleID <= 5) {
+                    return 1;
+                }
+                return 0;
+            }
+            return 0;
         });
     }
 }
