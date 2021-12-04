@@ -1,48 +1,70 @@
-@extends('layouts.app')
-@section('content-title') Création d'un formulaire @endsection
+@extends('layouts.forms')
 @section('content')
 
-@if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="formDetail">
+        <input type="text" class="input-field mon-shadow @error('title') is-invalid @enderror" name="title" id="title" placeholder="Titre" value="{{ old('title') }}"/>
+
+        <textarea class="input-field mon-shadow @error('message') is-invalid @enderror" id="message" name="message" rows="2" placeholder="Description">{{ old('message') }}</textarea>
+
+        <input type="datetime-local" class="input-field mon-shadow @error('date') is-invalid @enderror" name="date" id="date" placeholder="Date" value="{{ old('date') }}"/>
+        
+        <div class="input-field mon-shadow">
+        <label for="exampleColorInput" class="">Couleur du formulaire</label>
+        <input type="color" name="color" class="" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
+        </div>
     </div>
-@endif
 
-<form action="{{ url('forms') }}" method="POST">
-  @csrf
-  
-  <div class="mb-3 row">
-    <label for="title" class="col-sm-2 col-form-label"> Titre </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Saisir le titre de l'actualité" value="{{ old('title') }}"/>
+    <div class="formBuilder">
+        <div class="box-left">
+            <div data-tpl="header1" data-title="Header 1">
+                Label
+            </div>
+            <div data-tpl="header2" data-title="Header 2">
+                Input
+            </div>
+            <div data-tpl="header3" data-title="Header 3">
+                Text Area
+            </div>
+            <div data-tpl="shortparagraph" data-title="Short paragraph">
+                Select Box
+            </div>
+            <div data-tpl="image">
+                Select Image
+            </div>
+        </div>
+        <div class="box-right">
+            <div class="right"><span style="color: #fff">Double-click : Supprimer un champs</span></div>
+            <form id="form-builder" method="post" action="{{route('submit')}}" enctype='multipart/form-data'>
+                @csrf
+
+                @if(session()->has('message'))
+                    <div class="alert alert-success close-message">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+
+                <input type="hidden" id="form-data" name="formulaire" value="">
+                <div class="box-rightsave @error('formulaire') is-invalid @enderror" id="contents-2" style="min-height: 150px" name="formulaire" id="formulaire">
+                {{ old('formulaire') }}
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-
-  <div class="mb-3 row">
-    <label for="message" class="col-sm-2 col-form-label"> Message </label>
-    <div class="col-sm-10">
-      <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="3" placeholder="Saisir le message de l'actualité">{{ old('message') }}</textarea>
+    <div class="options bg-center" style="float: right">
+        <button class="cancel btn-danger"><a class="cancel2" href="{{ url('forms') }}"> Annuler </a></button>
+        <button class="reset">Reset</button>
+        <button class="save">Download PDF</button>
+        <button class="form-submit">Enregistrer</button>
     </div>
-  </div>
-
-  <div class="mb-3 row">
-    <label for="date" class="col-sm-2 col-form-label"> Date </label>
-    <div class="col-sm-10">
-      <input type="datetime-local" class="form-control @error('date') is-invalid @enderror" name="date" id="date" placeholder="Saisir la date de l'actualité" value="{{ old('date') }}"/>
-    </div>
-  </div>
-
-  <label for="exampleColorInput" class="form-label">Veuillez selectionner une couleur pour votre formulaire</label>
-  <input type="color" name="color" class="form-control form-control-color" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
-
-  <div class="mb-3">
-    <div class="offset-sm-2 col-sm-10">
-    <button class="btn btn-primary mb-1 mr-1" type="submit"> Ajouter </button>
-    <a href="{{ url('forms') }}" class="btn btn-danger mb-1"> Annuler </a>
-  </div>
-</form>
 @endsection

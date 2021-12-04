@@ -27,7 +27,8 @@ class StoreFormsRequest extends FormRequest
             'title' => ['required', 'max:100'],
             'message' => ['required'],
             'date' => ['required', 'date'],
-            'color' => ['nullable']
+            'color' => ['nullable'],
+            'formulaire' => ['nullable']
         ];
     }
 
@@ -37,7 +38,8 @@ class StoreFormsRequest extends FormRequest
             'title' => 'titre',
             'message' => 'message',
             'date' => 'date',
-            'color' => 'color'
+            'color' => 'color',
+            'formulaire' => 'formulaire'
         ];
     }
 

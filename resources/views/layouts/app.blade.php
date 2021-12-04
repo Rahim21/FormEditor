@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'FormEditor') }}</title>
+    <title>{{ __('FormEditor') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,27 +27,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href=" {{ asset('logo/FormEditor.png') }} "/>
+    <link rel="shortcut icon" type="image/png" href=" {{ asset('img/FormEditor.png') }} "/>
     <link rel="shortcut icon" type="image/x-icon" href=" {{ asset('favicon.ico') }} "/>
 
     <!-- Icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+
+    <!-- Recherche Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
         <div class="app-container">
     <div class="app-header">
       <div class="app-header-left">
-        <img src=" {{ asset('logo/FormEditor.png') }} " style="width: 35px"/>
-        <p class="app-name"><a class="text-decoration-none text-reset" href="{{ url('/') }}"> {{ config('app.name', 'FormEditor') }} </a></p>
-        <div class="search-wrapper mon-shadow">
-          <input class="search-input" type="text" placeholder="Rechercher">
+        <img src=" {{ asset('img/FormEditor.png') }} " style="width: 35px"/>
+        <p class="app-name"><a class="text-decoration-none text-reset" href="{{ url('/') }}"> {{ __('FormEditor') }} </a></p>
+        <form action="{{ url('/') }}" method="POST" class="search-wrapper mon-shadow">
+        {{-- <div class="search-wrapper mon-shadow"> --}}
+          
+          <input type="text" name="search" id="search" class="search-input" placeholder="Rechercher" />
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
             <defs></defs>
             <circle cx="11" cy="11" r="8"></circle>
             <path d="M21 21l-4.35-4.35"></path>
           </svg>
-        </div>
+        {{-- </div> --}}
+        </form>
       </div>
       <div class="app-header-right">
         @auth
@@ -78,7 +86,7 @@
         <button class="profile-btn">
           @auth
           @if (Auth::user()->profile_photo_path == NULL)
-          <img src="{{ asset(array_rand(['logo/defaut1.png'=>0, 'logo/defaut2.png'=>1], 1)) }}" />
+          <img src="{{ asset(array_rand(['img/defaut1.png'=>0, 'img/defaut2.png'=>1], 1)) }}" />
           @else
           <img src=" {{ Auth::user()->profile_photo_path }} " />
           @endif
@@ -328,6 +336,33 @@
     });
   });
 </script>
-        
+
+{{-- Recherche Ajax --}}
+<script>
+$(document).ready(function(){
+
+ fetch_customer_data();
+
+ function fetch_customer_data(query = '')
+ {
+  $.ajax({
+   url:"{{ route('recherche') }}",
+   method:'GET',
+   data:{query:query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('.recherche-ajax').html(data.table_data);
+    $('#total_records').text(data.total_data);
+   }
+  })
+ }
+
+ $(document).on('keyup', '#search', function(){
+  var query = $(this).val();
+  fetch_customer_data(query);
+ });
+});
+</script>
 </body>
 </html>

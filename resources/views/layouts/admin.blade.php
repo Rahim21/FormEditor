@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'FormEditor') }}</title>
+    <title>{{ __('FormEditor') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/appJetStream.js') }}" defer></script>
@@ -28,7 +28,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href=" {{ asset('logo/FormEditor.png') }} "/>
+    <link rel="shortcut icon" type="image/png" href=" {{ asset('img/FormEditor.png') }} "/>
     <link rel="shortcut icon" type="image/x-icon" href=" {{ asset('favicon.ico') }} "/>
 
     <!-- Icon -->
@@ -38,8 +38,8 @@
 <div class="app-container">
     <div class="app-header">
       <div class="app-header-left">
-        <img src=" http://10.5.2.25/~haya0002/V5Form/public/logo/FormEditor.png " style="width: 35px">
-        <p class="app-name"><a class="text-decoration-none text-reset" href="http://10.5.2.25/~haya0002/V5Form/public"> V5Form </a></p>
+        <img src=" {{asset('img/FormEditor.png')}} " style="width: 35px">
+        <p class="app-name"><a class="text-decoration-none text-reset" href="{{url('forms')}}"> FormEditor </a></p>
         <div class="search-wrapper mon-shadow">
           <input class="search-input" type="text" placeholder="Rechercher">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@
         <button class="profile-btn">
           @auth
           @if (Auth::user()->profile_photo_path == NULL)
-          <img src="{{ asset(array_rand(['logo/defaut1.png'=>0, 'logo/defaut2.png'=>1], 1)) }}" />
+          <img src="{{ asset(array_rand(['img/defaut1.png'=>0, 'img/defaut2.png'=>1], 1)) }}" />
           @else
           <img src=" {{ Auth::user()->profile_photo_path }} " />
           @endif
@@ -132,7 +132,7 @@
     </div>
     <div class="app-content">
       <div class="app-sidebar">
-        <a href=" http://10.5.2.25/~haya0002/V5Form/public/forms " class="app-sidebar-link mon-shadow ">
+        <a href=" {{url('forms')}} " class="app-sidebar-link mon-shadow ">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>

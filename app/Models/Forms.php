@@ -17,6 +17,8 @@ class Forms extends Model
 		'date',
 		'color',
 		'user_id',
+		'form_elements',
+		'formulaire',
 	];
 
 	protected $dates = [

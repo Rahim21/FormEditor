@@ -19,6 +19,8 @@ class CreateFormsTable extends Migration
             $table->text('message');
             $table->datetime('date');
             $table->string('color');
+            $table->longText('form_elements')->nullable();
+            $table->longText('formulaire')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

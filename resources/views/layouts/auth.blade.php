@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'FormEditor') }}</title>
+    <title>{{ __('FormEditor') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/auth.js') }}" defer></script>
@@ -16,7 +16,7 @@
     <link href="{{ asset('css/auth.css') }}" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href=" {{ asset('logo/FormEditor.png') }} "/>
+    <link rel="shortcut icon" type="image/png" href=" {{ asset('img/FormEditor.png') }} "/>
     <link rel="shortcut icon" type="image/x-icon" href=" {{ asset('favicon.ico') }} "/>
 
     <!-- fontawesome -->

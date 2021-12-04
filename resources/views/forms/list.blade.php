@@ -18,6 +18,10 @@
 			<span class="status-number">{{ ($countForms) }}</span>
 			<span class="status-type">Total des formulaires</span>
 		</div>
+		<div class="item-status">
+			<span class="status-number" id="total_records">0</span>
+			<span class="status-type">Recherche correspondante</span>
+		</div>
 	</div>
 
 	<div class="view-actions">
@@ -42,7 +46,7 @@
 	</div>
 </div>
 
-<div class="project-boxes jsGridView">
+<div class="project-boxes jsGridView recherche-ajax">
 
 	@auth
 	{{-- Création d'un formulaire --}}
@@ -101,7 +105,7 @@
 </svg>
 {{-- FIN SVG --}}
 					@if (Auth::user()->profile_photo_path == NULL)
-					<img src="{{ asset(array_rand(['logo/defaut1.png'=>0, 'logo/defaut2.png'=>1], 1)) }}" alt="participant" id="participant">
+					<img src="{{ asset(array_rand(['img/defaut1.png'=>0, 'img/defaut2.png'=>1], 1)) }}" alt="participant" id="participant">
 					@else
 					<img src=" {{ Auth::user()->profile_photo_path }} " alt="participant" id="participant">
           			@endif
@@ -145,7 +149,7 @@
     </a>
 
     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" href="{{ route('forms.show', $forms->id) }}"> <i class="bi bi-eye"></i> Consulter </a>
+      <a class="dropdown-item" href="{{ route('forms.show', $forms->id) }}" onmouseover="this.style.background='{{ $forms->color }}5a';" onmouseout="this.style.background='';"> <i class="bi bi-eye"></i> Consulter </a>
     </ul>    
   </li>
   @else
@@ -160,12 +164,12 @@
 
     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
       
-      <a class="dropdown-item" href="{{ route('forms.show', $forms->id) }}"> <i class="bi bi-eye"></i> Consulter </a>
+      <a class="dropdown-item" href="{{ route('forms.show', $forms->id) }}" onmouseover="this.style.background='{{ $forms->color }}5a';" onmouseout="this.style.background='';"> <i class="bi bi-eye"></i> Consulter </a>
 	@if(Gate::allows('form-access', $forms))
-      <a class="dropdown-item" href="{{ route('forms.edit', $forms->id) }}"> <i class="bi bi-pen"></i> Editer </a>
+      <a class="dropdown-item" href="{{ route('forms.edit', $forms->id) }}" onmouseover="this.style.background='{{ $forms->color }}5a';" onmouseout="this.style.background='';"> <i class="bi bi-pen"></i> Editer </a>
 
       <a class="dropdown-item" href="#" onclick="event.preventDefault();
-      document.getElementById('delete-form{{$forms->id}}').submit();"> <i class="bi bi-trash"></i> Supprimer </a>
+      document.getElementById('delete-form{{$forms->id}}').submit();" onmouseover="this.style.background='{{ $forms->color }}5a';" onmouseout="this.style.background='';"> <i class="bi bi-trash"></i> Supprimer </a>
 
       <form id="delete-form{{$forms->id}}" action="{{ route('forms.destroy', $forms->id) }}" method="POST" class="d-none">
         @method('DELETE')
@@ -231,7 +235,7 @@
 </svg>
 {{-- FIN SVG --}}
 					@if ($forms->user->profile_photo_path == NULL)
-					<img src="{{ asset(array_rand(['logo/defaut1.png'=>0, 'logo/defaut2.png'=>1], 1)) }}" alt="participant" id="participant">
+					<img src="{{ asset(array_rand(['img/defaut1.png'=>0, 'img/defaut2.png'=>1], 1)) }}" alt="participant" id="participant">
 					@else
 					<img src=" {{ $forms->user->profile_photo_path }} " alt="participant" id="participant">
           			@endif
@@ -251,9 +255,4 @@
 	</div>
 	@endforeach
 </div>
-<style>
-	/* a.dropdown-item:hover{
-		background-color: mettre un root puis laisser le choix au user dans le form pour la couleur;
-	} */
-</style>
 @endsection

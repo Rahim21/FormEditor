@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content-title') Modifier un formulaire @endsection
+@extends('layouts.admin')
 @section('content')
 
 @if($errors->any())
