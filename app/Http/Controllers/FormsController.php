@@ -73,7 +73,8 @@ class FormsController extends Controller
         $forms->user()->associate(Auth::id());
         $forms->save();
 
-        return redirect()->route('forms.show', ['form' => $forms]);
+        // return redirect()->route('forms.show', ['form' => $forms]);
+        return redirect()->route('forms.index')->with('message', 'Votre formulaires à été correctement soumis !');
     }
 
     /**
@@ -118,7 +119,8 @@ class FormsController extends Controller
         }
         $request->validated();
         $form->update($request->input());
-        return redirect()->route('forms.show', ['form' => $form]);
+        // return redirect()->route('forms.show', ['form' => $form]);
+        return redirect()->route('forms.index')->with('message', 'Votre formulaires à été correctement mis à jour !');
     }
 
     /**
@@ -135,22 +137,5 @@ class FormsController extends Controller
         $forms = Forms::findOrFail($id);
         $forms->delete();
         return redirect()->route('forms.index');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeForm(Request $request)
-    {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
-        $forms = Forms::make($request->input());
-        $forms->user()->associate(Auth::id());
-        $forms->save();
-        return redirect()->back()->with('message', 'Votre formulaires à été correctement soumis !');
     }
 }

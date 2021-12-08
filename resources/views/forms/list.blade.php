@@ -6,6 +6,17 @@
 @endsection
 @section('content')
 
+@if(session()->has('message'))
+	<div class="alert alert-success close-message">
+		{{ session()->get('message') }}
+	</div>
+@endif
+<script>
+setTimeout(function () {
+    $(".close-message").hide();
+}, 4000)
+</script>
+
 <div class="projects-section-line">
 	<div class="projects-status">
 		@auth
@@ -188,18 +199,18 @@
 			</div>
 			<div class="project-box-content-header">
 				<p class="box-content-header">{{ $forms->title }}</p>
-				<p class="box-content-subheader">@if(strlen($forms->message) > 20)
-			{{ substr($forms->message, 0, 20) }}...
+				<p class="box-content-subheader">@if(strlen($forms->description) > 20)
+			{{ substr($forms->description, 0, 20) }}...
 			@else
-			{{ $forms->message }}
+			{{ $forms->description }}
 			@endif</p>
 			</div>
 			<div class="box-progress-wrapper">
 				<p class="box-progress-header">Progress</p>
 				<div class="box-progress-bar">
-					<span class="box-progress" style="width: 60%; background-color: {{ $forms->color }}"></span>
+					<span class="box-progress" style="width: {{ $forms->progress }}%; background-color: {{ $forms->color }}"></span>
 				</div>
-				<p class="box-progress-percentage">60%</p>
+				<p class="box-progress-percentage">{{ $forms->progress }}%</p>
 			</div>
 			<div class="project-box-footer">
 				<div class="participants">

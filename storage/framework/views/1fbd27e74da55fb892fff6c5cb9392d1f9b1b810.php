@@ -20,7 +20,7 @@
 <form method="POST" action="<?php echo e(route('login')); ?>" class="sign-in-form">
 <?php echo csrf_field(); ?>
     <div class="centred">
-        <img class="left-flex" src=" <?php echo e(asset('logo/FormEditor.png')); ?> " style="width: 50px"/>
+        <img class="left-flex" src=" <?php echo e(asset('img/FormEditor.png')); ?> " style="width: 50px"/>
         <h2 class="title">Se connecter</h2>
     </div>
 

@@ -12,7 +12,7 @@
     <?php endif; ?>
 
     <div class="formDetail">
-        <input type="text" class="input-field mon-shadow <?php $__errorArgs = ['title'];
+        <input form="form-builder" type="text" class="input-field mon-shadow <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -21,16 +21,27 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="title" id="title" placeholder="Titre" value="<?php echo e(old('title')); ?>"/>
 
-        <textarea class="input-field mon-shadow <?php $__errorArgs = ['message'];
+        <textarea form="form-builder" class="input-field mon-shadow <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="message" name="message" rows="2" placeholder="Description"><?php echo e(old('message')); ?></textarea>
+unset($__errorArgs, $__bag); ?>" id="description" name="description" rows="2" placeholder="Description"><?php echo e(old('description')); ?></textarea>
+        
+        <div class="input-field mon-shadow">
+            <label for="exampleColorInput">Couleur</label>
+            <input form="form-builder" type="color" name="color" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
+        </div>
 
-        <input type="datetime-local" class="input-field mon-shadow <?php $__errorArgs = ['date'];
+        <div class="input-field mon-shadow range-slider">
+            <label for="formRange">Progression</label>
+            <input form="form-builder" id="formRange" name="progress" class="range-slider__range" type="range" value="<?php echo e(old('progress', 0)); ?>" min="0" max="100">
+            <span class="range-slider__value">0</span>
+        </div>
+
+        <input form="form-builder" type="datetime-local" class="input-field mon-shadow <?php $__errorArgs = ['date'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -38,11 +49,6 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="date" id="date" placeholder="Date" value="<?php echo e(old('date')); ?>"/>
-        
-        <div class="input-field mon-shadow">
-        <label for="exampleColorInput" class="">Couleur du formulaire</label>
-        <input type="color" name="color" class="" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
-        </div>
     </div>
 
     <div class="formBuilder">
@@ -56,9 +62,13 @@ unset($__errorArgs, $__bag); ?>" name="date" id="date" placeholder="Date" value=
             <div data-tpl="header3" data-title="Header 3">
                 Text Area
             </div>
-            <div data-tpl="shortparagraph" data-title="Short paragraph">
-                Select Box
+            <div data-tpl="checkbox" data-title="Checkbox">
+                CheckBox
             </div>
+            <div data-tpl="checkbox-check" data-title="Checkbox Checked">
+                CheckBox Checked
+            </div>
+            
             <div data-tpl="image">
                 Select Image
             </div>
@@ -84,17 +94,16 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" id="contents-2" style="min-height: 150px" name="formulaire" id="formulaire">
-                <?php echo e(old('formulaire')); ?>
-
+                
                 </div>
             </form>
         </div>
     </div>
     <div class="options bg-center" style="float: right">
         <button class="cancel btn-danger"><a class="cancel2" href="<?php echo e(url('forms')); ?>"> Annuler </a></button>
-        <button class="reset">Reset</button>
-        <button class="save">Download PDF</button>
-        <button class="form-submit">Enregistrer</button>
+        <button class="reset">Effacer </button>
+        <button class="save">Téléchargen en PDF</button>
+        <button class="form-submit" onclick ="replacePlaceholderByValue()">Enregistrer</button>
     </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.forms', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/haya0002/public_html/V6Form/resources/views/forms/create.blade.php ENDPATH**/ ?>

@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <i><?php echo e(strftime('%d/%m/%Y', strtotime($forms->date))); ?></i>
 <strong><?php echo e($forms->title); ?></strong>
-<?php echo e($forms->message); ?><br/>
+<?php echo e($forms->description); ?><br/>
 
 <em>par <?php echo e($forms->user->firstname); ?></em><br/>
 

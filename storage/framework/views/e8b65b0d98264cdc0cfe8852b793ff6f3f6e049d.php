@@ -6,6 +6,18 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
+<?php if(session()->has('message')): ?>
+	<div class="alert alert-success close-message">
+		<?php echo e(session()->get('message')); ?>
+
+	</div>
+<?php endif; ?>
+<script>
+setTimeout(function () {
+    $(".close-message").hide();
+}, 4000)
+</script>
+
 <div class="projects-section-line">
 	<div class="projects-status">
 		<?php if(auth()->guard()->check()): ?>
@@ -191,19 +203,19 @@
 			</div>
 			<div class="project-box-content-header">
 				<p class="box-content-header"><?php echo e($forms->title); ?></p>
-				<p class="box-content-subheader"><?php if(strlen($forms->message) > 20): ?>
-			<?php echo e(substr($forms->message, 0, 20)); ?>...
+				<p class="box-content-subheader"><?php if(strlen($forms->description) > 20): ?>
+			<?php echo e(substr($forms->description, 0, 20)); ?>...
 			<?php else: ?>
-			<?php echo e($forms->message); ?>
+			<?php echo e($forms->description); ?>
 
 			<?php endif; ?></p>
 			</div>
 			<div class="box-progress-wrapper">
 				<p class="box-progress-header">Progress</p>
 				<div class="box-progress-bar">
-					<span class="box-progress" style="width: 60%; background-color: <?php echo e($forms->color); ?>"></span>
+					<span class="box-progress" style="width: <?php echo e($forms->progress); ?>%; background-color: <?php echo e($forms->color); ?>"></span>
 				</div>
-				<p class="box-progress-percentage">60%</p>
+				<p class="box-progress-percentage"><?php echo e($forms->progress); ?>%</p>
 			</div>
 			<div class="project-box-footer">
 				<div class="participants">

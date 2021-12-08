@@ -45,14 +45,14 @@ class StoreAdminRequest extends FormRequest
         ];
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'lastname.required' => 'Il faut spécifier un nom',
-    //         'lastname.max' => 'Votre nom ne doit pas contenir plus de 100 caractères',
-    //         'firstname.required' => 'Il faut spécifier un prénom',
-    //         'firstname.max' => 'Votre prénom ne doit pas contenir plus de 100 caractères',
-    //         'role_id.required' => 'Veuillez définir un rôle',
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            'lastname.required' => 'Il faut spécifier un nom',
+            'lastname.max' => 'Votre nom ne doit pas contenir plus de 100 caractères',
+            'firstname.required' => 'Il faut spécifier un prénom',
+            'firstname.max' => 'Votre prénom ne doit pas contenir plus de 100 caractères',
+            'role_id.required' => 'Veuillez définir un rôle',
+        ];
+    }
 }

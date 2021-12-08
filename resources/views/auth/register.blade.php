@@ -23,7 +23,7 @@
 <form method="POST" action="{{ route('register') }}" class="sign-up-form">
 @csrf
     <div class="centred">
-    <img class="left-flex" src=" {{ asset('logo/FormEditor.png') }} " style="width: 50px"/>
+    <img class="left-flex" src=" {{ asset('img/FormEditor.png') }} " style="width: 50px"/>
     <h2 class="title">S'inscrire</h2>
     </div>
 

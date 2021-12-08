@@ -16,10 +16,11 @@ class CreateFormsTable extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->text('message');
+            $table->text('description');
             $table->datetime('date');
             $table->string('color');
-            $table->longText('form_elements')->nullable();
+            $table->integer('progress');
+            // $table->longText('form_elements')->nullable();
             $table->longText('formulaire')->nullable();
             $table->softDeletes();
             $table->timestamps();

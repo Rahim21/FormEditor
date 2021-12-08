@@ -13,16 +13,22 @@
     @endif
 
     <div class="formDetail">
-        <input type="text" class="input-field mon-shadow @error('title') is-invalid @enderror" name="title" id="title" placeholder="Titre" value="{{ old('title') }}"/>
+        <input form="form-builder" type="text" class="input-field mon-shadow @error('title') is-invalid @enderror" name="title" id="title" placeholder="Titre" value="{{ old('title') }}"/>
 
-        <textarea class="input-field mon-shadow @error('message') is-invalid @enderror" id="message" name="message" rows="2" placeholder="Description">{{ old('message') }}</textarea>
-
-        <input type="datetime-local" class="input-field mon-shadow @error('date') is-invalid @enderror" name="date" id="date" placeholder="Date" value="{{ old('date') }}"/>
+        <textarea form="form-builder" class="input-field mon-shadow @error('description') is-invalid @enderror" id="description" name="description" rows="2" placeholder="Description">{{ old('description') }}</textarea>
         
         <div class="input-field mon-shadow">
-        <label for="exampleColorInput" class="">Couleur du formulaire</label>
-        <input type="color" name="color" class="" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
+            <label for="exampleColorInput">Couleur</label>
+            <input form="form-builder" type="color" name="color" id="exampleColorInput" value="#06ea3f" title="Veuillez choisir une couleur">
         </div>
+
+        <div class="input-field mon-shadow range-slider">
+            <label for="formRange">Progression</label>
+            <input form="form-builder" id="formRange" name="progress" class="range-slider__range" type="range" value="{{ old('progress', 0) }}" min="0" max="100">
+            <span class="range-slider__value">0</span>
+        </div>
+
+        <input form="form-builder" type="datetime-local" class="input-field mon-shadow @error('date') is-invalid @enderror" name="date" id="date" placeholder="Date" value="{{ old('date') }}"/>
     </div>
 
     <div class="formBuilder">
@@ -36,9 +42,15 @@
             <div data-tpl="header3" data-title="Header 3">
                 Text Area
             </div>
-            <div data-tpl="shortparagraph" data-title="Short paragraph">
-                Select Box
+            <div data-tpl="checkbox" data-title="Checkbox">
+                CheckBox
             </div>
+            <div data-tpl="checkbox-check" data-title="Checkbox Checked">
+                CheckBox Checked
+            </div>
+            {{-- <div data-tpl="shortparagraph" data-title="Short paragraph">
+                Select Box
+            </div> --}}
             <div data-tpl="image">
                 Select Image
             </div>
@@ -56,15 +68,15 @@
 
                 <input type="hidden" id="form-data" name="formulaire" value="">
                 <div class="box-rightsave @error('formulaire') is-invalid @enderror" id="contents-2" style="min-height: 150px" name="formulaire" id="formulaire">
-                {{ old('formulaire') }}
+                {{-- {{ old('formulaire') }} --}}
                 </div>
             </form>
         </div>
     </div>
     <div class="options bg-center" style="float: right">
         <button class="cancel btn-danger"><a class="cancel2" href="{{ url('forms') }}"> Annuler </a></button>
-        <button class="reset">Reset</button>
-        <button class="save">Download PDF</button>
-        <button class="form-submit">Enregistrer</button>
+        <button class="reset">Effacer </button>
+        <button class="save">Téléchargen en PDF</button>
+        <button class="form-submit" onclick ="replacePlaceholderByValue()">Enregistrer</button>
     </div>
 @endsection

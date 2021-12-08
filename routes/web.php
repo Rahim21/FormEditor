@@ -37,4 +37,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/admin', [App\Http\Control
 Route::get('/action', [RechercheAjaxController::class, 'action'])->name('recherche');
 
 //form builder routes
-Route::post('submit', [FormsController::class, 'storeForm'])->name('submit');
+Route::post('submit', [FormsController::class, 'store'])->name('submit');

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'FormEditor')); ?></title>
+    <title><?php echo e(__('FormEditor')); ?></title>
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/auth.js')); ?>" defer></script>
@@ -54,18 +54,15 @@
                         Vous pouvez visiter en tant qu'invité ou bien vous inscrire pour avoir accès à plus de fonctionnalitées !
                     </p>
                     <div class="centred">
-                    <button class="btn transparent">
-                        <a class="soft-link" href="<?php echo e(url('/')); ?>">
+                        <a class="btn transparent soft-link" href="<?php echo e(url('/')); ?>">
                             <?php echo e(__("Visiter en tant qu'invité")); ?>
 
                         </a>
-                    </button>
-                    <button class="btn transparent">
-                        <a class="soft-link" href="<?php echo e(url('/register')); ?>">
+                        
+                        <a id="sign" class="btn transparent soft-link" href="<?php echo e(url('/register')); ?>">
                             <?php echo e(__("S'inscrire")); ?>
 
                         </a>
-                    </button>
                     </div>
                 </div>
                 <img src="<?php echo e(asset('svg/office.svg')); ?>" class="image" alt="" />
@@ -77,12 +74,10 @@
                     <p>
                         Connectez-vous sans plus attendre !
                     </p>
-                    <button class="btn transparent">
-                        <a class="soft-link" href="<?php echo e(url('/login')); ?>">
+                        <a id="sign" class="btn transparent soft-link" href="<?php echo e(url('/login')); ?>">
                             <?php echo e(__("Se connecter")); ?>
 
                         </a>
-                    </button>
                 </div>
                 <img src="<?php echo e(asset('svg/secure_login.svg')); ?>" class="image" alt="" />
             </div>

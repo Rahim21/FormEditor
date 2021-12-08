@@ -25,9 +25,10 @@ class StoreFormsRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'message' => ['required'],
-            'date' => ['required', 'date'],
-            'color' => ['nullable'],
+            'description' => ['required'],
+            'date' => ['required', 'date', 'before:tomorrow'],
+            'color' => ['required', 'string', 'max:10'],
+            'progress' => ['required', 'integer'],
             'formulaire' => ['nullable']
         ];
     }
@@ -36,9 +37,10 @@ class StoreFormsRequest extends FormRequest
     {
         return [
             'title' => 'titre',
-            'message' => 'message',
+            'description' => 'description',
             'date' => 'date',
             'color' => 'color',
+            'progress' => 'progress',
             'formulaire' => 'formulaire'
         ];
     }
@@ -48,9 +50,11 @@ class StoreFormsRequest extends FormRequest
         return [
             'title.required' => 'Il faut spécifier un titre',
             'title.max' => 'Le titre ne doit pas contenir plus de 100 caractères',
-            'message.required' => 'Il faut spécifier un message',
+            'description.required' => 'Il faut spécifier une description',
             'date.required' => 'Il faut spécifier une date',
-            'date.date' => 'Le format de la date est incorrect'
+            'date.date' => 'Le format de la date est incorrect',
+            'date.before' => 'La date doit être inférieur ou égal à aujourd\'hui'
+
         ];
     }
 }

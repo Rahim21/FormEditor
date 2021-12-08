@@ -1,57 +1,121 @@
 <?php $__env->startSection('content'); ?>
 
-<?php if($errors->any()): ?>
-    <div class="alert alert-danger">
-        <ul>
-            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li><?php echo e($error); ?></li>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        </ul>
-    </div>
-<?php endif; ?>
 
-<form action="<?php echo e(url('forms', $forms->id)); ?>" method="POST">
-  <?php echo csrf_field(); ?>
-  <?php echo method_field('PUT'); ?>
+    <?php if($errors->any()): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-  <div class="mb-3 row">
-    <label for="title" class="col-sm-2 col-form-label"> Titre </label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control <?php $__errorArgs = ['title'];
+    <div class="formDetail">
+        <input form="form-builder" type="text" class="input-field mon-shadow <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="title" id="title" placeholder="Saisir le titre de l'actualité" value="<?php echo e($forms->title); ?>"/>
-    </div>
-  </div>
+unset($__errorArgs, $__bag); ?>" name="title" id="title" placeholder="Titre" value="<?php echo e($forms->title); ?>"/>
 
-  <div class="mb-3 row">
-    <label for="message" class="col-sm-2 col-form-label"> Message </label>
-    <div class="col-sm-10">
-      <textarea class="form-control" id="message" name="message" rows="3" placeholder="Saisir le message de l'actualité"><?php echo e($forms->message); ?></textarea>
-    </div>
-  </div>
+        <textarea form="form-builder" class="input-field mon-shadow <?php $__errorArgs = ['description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="description" name="description" rows="2" placeholder="Description"><?php echo e($forms->description); ?></textarea>
+        
+        <div class="input-field mon-shadow">
+            <label for="exampleColorInput">Couleur</label>
+            <input form="form-builder" type="color" name="color" id="exampleColorInput" value="<?php echo e($forms->color); ?>" title="Veuillez choisir une couleur">
+        </div>
 
-  <div class="mb-3 row">
-    <label for="date" class="col-sm-2 col-form-label"> Date </label>
-    <div class="col-sm-10">
-      <input type="datetime-local" class="form-control" name="date" id="date" placeholder="Saisir la date de l'actualité" value="<?php echo e(date('Y-m-d\TH:i', strtotime($forms->date))); ?>"/>
-    </div>
-  </div>
+        <div class="input-field mon-shadow range-slider">
+            <label for="formRange">Progression</label>
+            <input form="form-builder" id="formRange" name="progress" class="range-slider__range" type="range" value="<?php echo e($forms->progress); ?>" min="0" max="100">
+            <span class="range-slider__value">0</span>
+        </div>
 
-  <label for="exampleColorInput" class="form-label">Veuillez selectionner une couleur pour votre formulaire</label>
-  <input type="color" name="color" class="form-control form-control-color" id="exampleColorInput" value="<?php echo e($forms->color); ?>" title="Veuillez choisir une couleur">
-
-  <div class="mb-3">
-    <div class="offset-sm-2 col-sm-10">
-      <button class="btn btn-primary mb-1 mr-1" type="submit"> Modifier </button>
-      <a href="<?php echo e(route('forms.show', $forms->id)); ?>" class="btn btn-danger mb-1"> Annuler </a>
+        <input form="form-builder" type="datetime-local" class="input-field mon-shadow <?php $__errorArgs = ['date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="date" id="date" placeholder="Date" value="<?php echo e(date('Y-m-d\TH:i', strtotime($forms->date))); ?>"/>
     </div>
-  </div>
-</form>
-</div>
+
+    <div class="formBuilder">
+        <div class="box-left">
+            <div data-tpl="header1" data-title="Header 1">
+                Label
+            </div>
+            <div data-tpl="header2" data-title="Header 2">
+                Input
+            </div>
+            <div data-tpl="header3" data-title="Header 3">
+                Text Area
+            </div>
+            <div data-tpl="checkbox" data-title="Checkbox">
+                CheckBox
+            </div>
+            <div data-tpl="checkbox-check" data-title="Checkbox Checked">
+                CheckBox Checked
+            </div>
+            
+            <div data-tpl="image">
+                Select Image
+            </div>
+        </div>
+        <div class="box-right">
+            <div class="right"><span style="color: #fff">Double-click : Supprimer un champs</span></div>
+            <form id="form-builder" action="<?php echo e(url('forms', $forms->id)); ?>" method="POST" enctype='multipart/form-data'>
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
+
+                <?php if(session()->has('message')): ?>
+                    <div class="alert alert-success close-message">
+                        <?php echo e(session()->get('message')); ?>
+
+                    </div>
+                <?php endif; ?>
+
+                <input type="hidden" id="form-data" name="formulaire" value="">
+                <div class="box-rightsave <?php $__errorArgs = ['formulaire'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="contents-2" style="min-height: 150px" name="formulaire" id="formulaire">
+                <?php
+                $formChaine = substr($forms->formulaire ,1, -1);
+                // $sortie = preg_replace("#(?<!\\\)d#", ' ', $formChaine);
+                $sortie =  str_replace('\\', '', $formChaine);
+                // while le premier caractère n'est pas un < efface le premier caractère
+                if(strlen($sortie)>5){
+                    $sortie = substr($sortie, strpos($sortie, "<")) ;    
+                }
+                echo $sortie;
+                ?>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="options bg-center" style="float: right">
+        <button class="cancel btn-danger"><a class="cancel2" href="<?php echo e(url('forms')); ?>"> Annuler </a></button>
+        <button class="reset">Effacer</button>
+        <button class="save">Téléchargen en PDF</button>
+        <button class="form-submit" onclick ="replacePlaceholderByValue(); event.preventDefault();
+      document.getElementById('form-builder').submit();">Enregistrer</button>
+    </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/haya0002/public_html/V6Form/resources/views/forms/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.forms', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/haya0002/public_html/V6Form/resources/views/forms/edit.blade.php ENDPATH**/ ?>

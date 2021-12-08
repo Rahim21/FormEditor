@@ -16,12 +16,12 @@ class RechercheAjaxController extends Controller
         return view('forms.list');
     }
 
-    function insererDate($message)
+    function insererDate($description)
     {
-        if (strlen($message) > 20) {
-            return substr($message, 0, 20) . "...";
+        if (strlen($description) > 20) {
+            return substr($description, 0, 20) . "...";
         }
-        return $message;
+        return $description;
     }
     function Gate($forms)
     {
@@ -48,7 +48,7 @@ class RechercheAjaxController extends Controller
             $query = $request->get('query');
             if ($query != '') {
                 $recherche = Forms::where('title', 'like', '%' . $query . '%')
-                    ->orWhere('message', 'like', '%' . $query . '%')
+                    ->orWhere('description', 'like', '%' . $query . '%')
 
                     ->orWhere('date', 'like', '%' . $query . '%')
                     ->orderBy('date', 'desc')
@@ -119,7 +119,7 @@ class RechercheAjaxController extends Controller
     </div>
     <div class='project-box-content-header'>
         <p class='box-content-header'>" . $forms->title . "</p>
-        <p class='box-content-subheader'>" . $this->insererDate($forms->message) . "</p>
+        <p class='box-content-subheader'>" . $this->insererDate($forms->description) . "</p>
     </div>
     <div class='box-progress-wrapper'>
         <p class='box-progress-header'>Progress</p>

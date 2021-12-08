@@ -10,20 +10,53 @@ canvas {
 main.py-4.displayBuilder {
     flex: auto;
 }
+
+/* Pose problème pour placer un élément en dernier */
+/* div#contents-2 {
+    zoom: 80%;
+} */
+
+/* Champs info du form */
 .formDetail {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
     margin-top: -0.5rem;
+    zoom: 80%;
 }
+
+/* Style champs du form */
+.build-element {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+label.build-element {
+    font-weight: bold;
+}
+.build-input {
+    border-bottom-style: dotted;
+    border-inline: none;
+    border-top: none;
+}
+/* Form content */
 .formBuilder{
     height: calc(100% - 5em);
 }
 @media (max-width: 992px) {
     .formBuilder{
         height: calc(100% - 12em);
+    }
+    .formDetail {
+        display: inline-flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom: 0.5rem;
+        margin-top: -0.5rem;
+        zoom: 75%;
+        align-items: stretch;
     }
 }
 
@@ -160,7 +193,7 @@ a.cancel2 {
 .input-field {
     background-color: #fff;
     min-height: 40px;
-    max-height: 40px;
+    max-height: 45px;
     border-radius: 55px;
     margin-right: 2rem;
     padding-left: 2rem;
@@ -195,4 +228,88 @@ a.cancel2 {
 
 .intput-filed, label {
     vertical-align: bottom;
+}
+
+/* Range : pour definir la progression du formulaire */
+.range-slider {
+    padding-top: 3px;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  border-radius: 10px;
+  background: #d7dcdf!important;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+.range-slider__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -webkit-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+.range-slider__range::-webkit-slider-thumb:hover {
+  background: #1abc9c;
+}
+.range-slider__range:active::-webkit-slider-thumb {
+  background: #1abc9c;
+}
+.range-slider__range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #2c3e50;
+  cursor: pointer;
+  -moz-transition: background 0.15s ease-in-out;
+  transition: background 0.15s ease-in-out;
+}
+.range-slider__range::-moz-range-thumb:hover {
+  background: #1abc9c;
+}
+.range-slider__range:active::-moz-range-thumb {
+  background: #1abc9c;
+}
+.range-slider__range:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1abc9c;
+}
+
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: 45px;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #2c3e50;
+  padding: 5px 10px;
+  margin-left: 8px;
+}
+.range-slider__value:after {
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #2c3e50;
+  border-bottom: 7px solid transparent;
+  content: "";
+}
+
+::-moz-range-track {
+  background: #d7dcdf;
+  border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
 }

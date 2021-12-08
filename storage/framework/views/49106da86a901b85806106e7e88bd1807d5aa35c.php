@@ -22,7 +22,7 @@
 <form method="POST" action="<?php echo e(route('register')); ?>" class="sign-up-form">
 <?php echo csrf_field(); ?>
     <div class="centred">
-    <img class="left-flex" src=" <?php echo e(asset('logo/FormEditor.png')); ?> " style="width: 50px"/>
+    <img class="left-flex" src=" <?php echo e(asset('img/FormEditor.png')); ?> " style="width: 50px"/>
     <h2 class="title">S'inscrire</h2>
     </div>
 

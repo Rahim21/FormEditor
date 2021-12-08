@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(config('app.name', 'Laravel')); ?></title>
+    <title><?php echo e(__('FormEditor')); ?></title>
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
@@ -39,7 +39,7 @@
     <div class="app-header">
       <div class="app-header-left">
         <img src=" <?php echo e(asset('img/FormEditor.png')); ?> " style="width: 35px">
-        <p class="app-name"><a class="text-decoration-none text-reset" href="<?php echo e(url('forms')); ?>"> V5Form </a></p>
+        <p class="app-name"><a class="text-decoration-none text-reset" href="<?php echo e(url('forms')); ?>"> <?php echo e(__('FormEditor')); ?> </a></p>
       </div>
       <div class="app-header-right">
         <button class="mode-switch" title="Switch Theme">

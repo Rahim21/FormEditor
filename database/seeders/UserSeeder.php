@@ -46,6 +46,26 @@ class UserSeeder extends Seeder
             'profile_photo_path' => 'https://thumbs.gfycat.com/InfamousYawningHorseshoecrab-size_restricted.gif',
             'role_id' => 1,
         ]);
-        User::factory()->count(10)->create();
+        $this->createChuck();
+        User::factory()->count(15)->create();
+    }
+
+    function createChuck()
+    {
+        $roleNameChuck = ['MODO', 'EDU', 'PRO', 'PARTICULIER'];
+        $roleEmailChuck = ['moderateur', 'etudiant', 'professionnel', 'particulier'];
+        $roleRoleChuck = [2, 3, 4, 5];
+        for ($i = 0; $i < 4; $i++) {
+            User::create([
+                'firstname' => 'Chuck ' . $roleNameChuck[$i],
+                'lastname' => 'NORRIS',
+                'email' => $roleEmailChuck[$i] . '@formeditor.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => '',
+                'profile_photo_path' => 'https://thumbs.gfycat.com/InfamousYawningHorseshoecrab-size_restricted.gif',
+                'role_id' => $roleRoleChuck[$i],
+            ]);
+        }
     }
 }

@@ -54,16 +54,13 @@
                         Vous pouvez visiter en tant qu'invité ou bien vous inscrire pour avoir accès à plus de fonctionnalitées !
                     </p>
                     <div class="centred">
-                    <button class="btn transparent">
-                        <a class="soft-link" href="{{ url('/') }}">
+                        <a class="btn transparent soft-link" href="{{ url('/') }}">
                             {{ __("Visiter en tant qu'invité") }}
                         </a>
-                    </button>
-                    <button class="btn transparent">
-                        <a class="soft-link" href="{{ url('/register') }}">
+                        
+                        <a id="sign" class="btn transparent soft-link" href="{{ url('/register') }}">
                             {{ __("S'inscrire") }}
                         </a>
-                    </button>
                     </div>
                 </div>
                 <img src="{{ asset('svg/office.svg') }}" class="image" alt="" />
@@ -75,11 +72,9 @@
                     <p>
                         Connectez-vous sans plus attendre !
                     </p>
-                    <button class="btn transparent">
-                        <a class="soft-link" href="{{ url('/login') }}">
+                        <a id="sign" class="btn transparent soft-link" href="{{ url('/login') }}">
                             {{ __("Se connecter") }}
                         </a>
-                    </button>
                 </div>
                 <img src="{{ asset('svg/secure_login.svg') }}" class="image" alt="" />
             </div>

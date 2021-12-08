@@ -3,7 +3,7 @@
 @section('content')
 <i>{{ strftime('%d/%m/%Y', strtotime($forms->date)) }}</i>
 <strong>{{ $forms->title }}</strong>
-{{ $forms->message }}<br/>
+{{ $forms->description }}<br/>
 
 <em>par {{ $forms->user->firstname }}</em><br/>
 

@@ -25,9 +25,10 @@ class FormsFactory extends Factory
         $usersID = DB::table('users')->pluck('id');
         return [
             'title' => $this->faker->realText($maxNbChars = 20, $indexSize = 2),
-            'message' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
+            'description' => $this->faker->realText($maxNbChars = 200, $indexSize = 2),
             'date' => $this->faker->dateTimeBetween($startDate = '-1 years'),
             'color' => $this->faker->hexcolor(),
+            'progress' => $this->faker->numberBetween($min = 0, $max = 100),
             'user_id' => $this->faker->randomElement($usersID)
         ];
     }

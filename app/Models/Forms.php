@@ -13,9 +13,10 @@ class Forms extends Model
 
 	protected $fillable = [
 		'title',
-		'message',
+		'description',
 		'date',
 		'color',
+		'progress',
 		'user_id',
 		'form_elements',
 		'formulaire',
