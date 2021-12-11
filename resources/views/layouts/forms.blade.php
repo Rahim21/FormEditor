@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    @yield('groupeCSS')
     <link href="{{ asset('dist/dragula.min.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -42,24 +43,31 @@
         <p class="app-name"><a class="text-decoration-none text-reset" href="{{url('forms')}}"> {{ __('FormEditor') }} </a></p>
       </div>
       <div class="app-header-right">
+        @auth
+          @if (Auth::user()->role_id ==1 || Auth::user()->role_id ==2)
+              <a href="{{ url('admin') }}" id="admin">{{ Auth::user()->role->role_nom }}</a>
+          @endif
+        @endauth
         <button class="mode-switch" title="Switch Theme">
           <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
             <defs></defs>
             <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
           </svg>
         </button>
-        <button class="add-btn" title="Add New Project">
-          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
+
+        {{-- <button class="add-btn" title="Add New Project">
+          <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </button>
         <button class="notification-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
           </svg>
-        </button>
+        </button> --}}
+
         <button class="profile-btn">
           @auth
           @if (Auth::user()->profile_photo_path == NULL)
@@ -79,10 +87,16 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @if (Route::has('login'))
-                                      <a class="dropdown-item" href="{{ route('login') }}">{{ __("Se Connecter") }}</a>
+                                      <a class="dropdown-item" href="{{ route('login') }}">
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                        {{ __("Se Connecter") }}
+                                      </a>
                                     @endif
                                     @if (Route::has('register'))
-                                      <a class="dropdown-item" href="{{ route('register') }}">{{ __("S'Inscrire") }}</a>
+                                      <a class="dropdown-item" href="{{ route('register') }}">
+                                        <i class="bi bi-plus-square"></i>
+                                        {{ __("S'Inscrire") }}
+                                      </a>
                                     @endif
                                 </div>
                             </li>
@@ -94,10 +108,15 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                   
+                                  <a class="dropdown-item" style="background-color: {{Auth::user()->role->role_couleur.'8a'}}">
+                                  <i class="bi bi-patch-check"></i>
+                                  {{ Auth::user()->role->role_nom }}
+                                  </a>
+
                                   <a class="dropdown-item" href="#">
                                   <i class="bi bi-gear"></i>
                                   {{ __("Paramètre") }}
-                                </a>
+                                  </a>
                                 
                                   <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -130,13 +149,40 @@
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
           </svg>
         </a>
-        <a href="#" class="app-sidebar-link mon-shadow ">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
+        <a href=" {{ url('groupes') }} " class="app-sidebar-link mon-shadow {{ str_contains(request()->url(), 'groupes') ? 'active' : '' }}">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="24" height="24" viewBox="0 0 550.000000 550.000000"
+ preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<g transform="translate(0.000000,550.000000) scale(0.100000,-0.100000)"
+fill="currentColor" stroke="none">
+<path d="M2642 4759 c-233 -34 -440 -187 -548 -404 -53 -108 -74 -197 -74
+-326 0 -327 206 -599 530 -700 107 -34 292 -34 400 0 262 81 446 273 512 533
+17 69 20 101 15 203 -6 135 -24 203 -81 312 -109 207 -314 349 -550 382 -87
+12 -115 12 -204 0z"/>
+<path d="M1284 4211 c-138 -22 -259 -85 -360 -185 -204 -204 -247 -502 -111
+-761 42 -80 164 -202 247 -248 221 -121 477 -108 678 33 73 51 162 148 189
+206 16 32 16 33 -24 81 -101 122 -179 276 -220 430 -20 81 -25 123 -27 240
+l-1 142 -32 15 c-84 40 -243 62 -339 47z"/>
+<path d="M4015 4206 c-38 -7 -92 -23 -120 -35 l-50 -21 3 -91 c9 -253 -83
+-519 -252 -723 l-40 -48 23 -43 c35 -67 115 -149 196 -203 197 -132 443 -143
+660 -29 80 42 202 164 248 247 110 200 110 430 0 630 -46 83 -168 205 -248
+247 -131 68 -288 94 -420 69z"/>
+<path d="M2553 2915 c-335 -61 -632 -284 -787 -592 -91 -182 -116 -318 -116
+-630 l0 -223 464 0 463 0 7 53 c11 81 52 238 92 345 118 318 358 614 648 800
+l78 50 -45 31 c-109 74 -268 139 -410 166 -96 18 -294 18 -394 0z"/>
+<path d="M1259 2560 c-229 -27 -444 -134 -604 -301 -99 -103 -134 -154 -190
+-272 -64 -135 -86 -228 -92 -384 l-6 -133 455 0 455 0 6 268 c5 209 10 288 26
+363 26 126 71 261 125 369 l44 88 -37 6 c-44 7 -94 6 -182 -4z"/>
+<path d="M4075 2560 c-313 -36 -636 -207 -833 -442 -339 -406 -403 -949 -167
+-1418 62 -122 135 -222 240 -325 508 -506 1324 -497 1823 19 191 198 306 431
+347 706 101 665 -349 1305 -1013 1439 -117 24 -289 33 -397 21z m800 -764 c69
+-53 92 -144 56 -221 -13 -27 -151 -171 -412 -432 -349 -346 -399 -393 -437
+-403 -46 -12 -90 -7 -132 15 -14 8 -120 109 -237 227 -180 181 -213 219 -223
+256 -35 134 88 257 222 221 35 -9 68 -36 181 -147 l137 -136 313 311 c171 171
+326 318 342 327 49 26 143 17 190 -18z"/>
+</g>
+</svg>
         </a>
         <a href="#" class="app-sidebar-link mon-shadow">
           <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
@@ -147,7 +193,7 @@
         </a>
       </div>
 
-    <main class="py-4 displayBuilder">
+    <main class="@yield('main')">
 
         @yield('content')
 

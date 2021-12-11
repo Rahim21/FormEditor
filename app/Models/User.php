@@ -79,6 +79,11 @@ class User extends Authenticatable
         return $this->hasMany(Forms::class);
     }
 
+    public function formGroupe()
+    {
+        return $this->belongsToMany(Forms::class);
+    }
+
     public function role()
     {
         //return $this->hasMany(Role::class, 'id', 'role_id');

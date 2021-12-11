@@ -72,7 +72,7 @@
     <div class="centred" style="align-items: center;">
         <label for="role_confirm" class="left-flex">{{ __('Votre Statut : ') }}</label>
         <div class="col-md-6">
-            <select class="input-field mon-shadow" name="role_confirm">
+            <select class="input-field mon-shadow" name="role_id">
                 <option value={{DB::table('roles')->where('role_nom', 'Etudiant')->value('id')}}>Etudiant</option>
                 <option value={{DB::table('roles')->where('role_nom', 'Professionnel')->value('id')}}>Professionnel</option>
                 <option value={{DB::table('roles')->where('role_nom', 'Particulier')->value('id')}}>Particulier</option>

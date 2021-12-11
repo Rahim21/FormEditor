@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Forms;
+use App\Models\FormsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,12 @@ class FormsController extends Controller
         $forms = Forms::make($request->input());
         $forms->user()->associate(Auth::id());
         $forms->save();
+
+        // FormsUser::create([
+        //     'forms_id' => $forms->id,
+        //     'user_id' => Auth::id(),
+        // ]);
+        DB::insert('insert into forms_user (forms_id, user_id) values (?, ?)', [$forms->id, Auth::id()]);
 
         // return redirect()->route('forms.show', ['form' => $forms]);
         return redirect()->route('forms.index')->with('message', 'Votre formulaires à été correctement soumis !');

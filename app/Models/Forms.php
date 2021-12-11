@@ -18,8 +18,9 @@ class Forms extends Model
 		'color',
 		'progress',
 		'user_id',
-		'form_elements',
+		'groupe_id',
 		'formulaire',
+		'logo',
 	];
 
 	protected $dates = [
@@ -32,5 +33,10 @@ class Forms extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class);
+	}
+
+	public function usersGroupe()
+	{
+		return $this->belongsToMany(User::class);
 	}
 }

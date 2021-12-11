@@ -20,9 +20,9 @@ class CreateFormsTable extends Migration
             $table->datetime('date');
             $table->string('color');
             $table->integer('progress');
-            // $table->longText('form_elements')->nullable();
             $table->longText('formulaire')->nullable();
             $table->softDeletes();
+            $table->string('logo', 2048)->nullable();
             $table->timestamps();
         });
     }

@@ -30,6 +30,11 @@ class CreateNewUser implements CreatesNewUsers
             'role_id' => ['required', 'integer'],
         ])->validate();
 
+        /* Pas une super idée mais c'est tjr ça de fait (url de l'image stocké)*/
+        if (empty($input['profile_photo_path'])) {
+            $input['profile_photo_path'] = asset('img/defaut1.png');
+        }
+
         return User::create([
             'lastname' => $input['lastname'],
             'firstname' => $input['firstname'],

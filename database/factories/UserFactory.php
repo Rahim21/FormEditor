@@ -37,7 +37,7 @@ class UserFactory extends Factory
         ];
     }
 
-    public static function loadImage()
+    public function loadImage()
     {
         return "https://source.unsplash.com/800x800/?portrait=" . mt_rand(1, 30);
     }

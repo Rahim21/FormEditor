@@ -1,4 +1,6 @@
 @extends('layouts.forms')
+@section('main') py-4 displayBuilder @endsection
+
 @section('content')
 
 
@@ -76,7 +78,7 @@
     <div class="options bg-center" style="float: right">
         <button class="cancel btn-danger"><a class="cancel2" href="{{ url('forms') }}"> Annuler </a></button>
         <button class="reset">Effacer </button>
-        <button class="save">Téléchargen en PDF</button>
+        <button class="save">Télécharger en PDF</button>
         <button class="form-submit" onclick ="replacePlaceholderByValue()">Enregistrer</button>
     </div>
 @endsection

@@ -259,7 +259,7 @@ th {
   padding-left: 15px;
   border-left: 1px dotted rgba(200, 209, 224, 0.6);
   border-bottom: 1px solid #e8e8e8;
-  background: #ffc491;
+  /* background: #ffc491; */
   text-align: left;
   /* With border-collapse, we must use box-shadow or psuedo elements
   for the header borders */
