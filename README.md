@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# ** [alt text](public/img/FormEditor.png) - FormEditor - Un site pour créer votre formulaire en ligne avec la possibilité d'intéragir directement avec les personnes qui pourront y être associé.**
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1. [Introduction](#intro)
+2. [Prérequis d'utilisation](#pre)
+3. [Que faire ?](#guide)
 
-## About Laravel
+<div id="intro"></div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## **1- **
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Le site FormEditor est un site qui vous permettra de créer des formulaires en ligne et de les poster de façon permanente, pour une meilleure gestion de tout ce qui est paperasses administratives.
+Vous pourrez former des groupes pour que vos correspondant puisse remplir les champs qui leur sont attribué de façon rapide et simple.
+Les utilisateurs peuvent créer autant de formulaire qu’ils le souhaitent sans contraintes ni limites.
+FormEditor est un site accessible par tous. Facile d’utilisation, chaque utilisateur possède des rôles.
+Utile à la fois pour les professionnels et le monde du travail comme pour étudiant ou simple particulier.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<div id="pre"></div>
 
-## Learning Laravel
+## **2- **
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Voici quelques informations nécessaires à savoir avant d'utiliser FormEditor :
+Le projet est installé sur GitLab ainsi que la VM de DRIOUCHE Sami (drio0004) et HAYAT Rahim (haya0002).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+***__Lien de téléchargement GitLab :__***
+https://gitlab-mmi.univ-reims.fr/RSFE/formeditor.git
 
-## Laravel Sponsors
+***__Accès à FormEditor :__***
+http://10.5.2.25/~drio0004/FormEditor/public/
+http://10.5.2.25/~haya0002/FormEditor/public/
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+***__Accès à phpmyadmin :__***
+http://10.5.2.25/phpmyadmin/index.php
+***__Accès à la base de données (Sami DRIOUCHE) :__***
+DB_DATABASE=DRIOU1DB
+DB_USERNAME=DRIOU1
+DB_PASSWORD=%R23bG2j|
+***__Accès à la base de données (Rahim HAYAT):__***
+DB_DATABASE=HAYAT1DB
+DB_USERNAME=HAYAT1
+DB_PASSWORD=!62p=LYe4
 
-### Premium Partners
+Pour récupérer le projet laravel du site à l’aide du lien GitLab :
+-depuis la VM veuillez-vous situez dans le répertoire 
+-il vous suffit d’ouvrir un terminal, taper les commandes :
+```
+git clone https://gitlab-mmi.univ-reims.fr/RSFE/formeditor.git FormEditor
+cd FormEditor/
+composer install
+```
+Utilisez la commande cp si vous êtes sous linux sinon copy sous Windows :
+```
+cp .env.example .env
+php artisan key:generate
+```
+**Si vous avez cloné le projet sur la VM, il faut permettre l’accès à ces 2 répertoires à l’aide de la commande suivante :**
+```
+chmod -R 777 storage/ bootstrap/cache
+```
+La première fois il vous faudra vous connecter avec le compte admin qui vous permettra par la suite de créer des comptes utilisateur (professionnel, particulier et étudiant) et pouvoir exploiter pleinement le site :
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+***__Compte admin (Chuck NORRIS) :__***
+Email : chuck.norris@toto.fr
+Mot de passe : totototo
 
-## Contributing
+Puis quelque compte par default pour chacun des rôles :
+***__Compte modérateur :__***
+Email : moderateur@formeditor.com
+Mot de passe : password
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+***__Compte étudiant :__***
+Email : etudiant@formeditor.com
+Mot de passe : password
 
-## Code of Conduct
+***__Compte professionnel :__***
+Email : professionnel@formeditor.com
+Mot de passe : password
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+***__Compte particulier :__***
+Email : particulier@formeditor.com
+Mot de passe : password
 
-## Security Vulnerabilities
+<div id="guide"></div>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## **3- **
 
-## License
+Un simple visiteur peut simplement consulter les formulaires
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1) Créer votre compte ou utilisez l'un de ceux proposé au dessus.
+2) Créez un formulaire, modifiez-le, Télécharger le en PDF, ajoutez y des membres. **(Recherchez un formulaire à l'aide de la barre de recherche)**
+3) Accéder au groupe le propriétaire du formulaire à la possibilité de gérer son groupe. (ajouter/supprimer membre, éditer/supprimer groupe).
+4) Si vous êtes Administrateur ou Modérateur, gérer la partie utilisateurs du site (créer, éditer, consulter et supprimer un utilisateur).
+
+***__Notes :__*** 
+Prendre en compte que l'administrateur à un accès total sur le site.
+Nous n'avons pas eut le temps d'ajouter l'option public/privé d'un formulaire pour éviter sa consultation.
