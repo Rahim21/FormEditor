@@ -1,18 +1,23 @@
+/* Message d'alerte timer */
+setTimeout(function () {
+	$(".close-message").hide();
+}, 4000)
+
 /* Bannière d'alerte */
 
-$('.btn_alert').click(function(){
+$('.btn_alert').click(function () {
 	$('.alert').addClass("show");
 	$('.alert').removeClass("hide");
 	$('.alert').addClass("showAlert");
-	setTimeout(function(){
-	  $('.alert').removeClass("show");
-	  $('.alert').addClass("hide");
-	},5000);
-  });
-  $('.close-btn').click(function(){
+	setTimeout(function () {
+		$('.alert').removeClass("show");
+		$('.alert').addClass("hide");
+	}, 5000);
+});
+$('.close-btn').click(function () {
 	$('.alert').removeClass("show");
 	$('.alert').addClass("hide");
-  });
+});
 
 /* DEBUT Container Panel : Connexion & Inscription */
 
@@ -53,8 +58,8 @@ $(document).ready(function () {
 	// check password strength
 	function testPasswordStrength(value) {
 		var strongRegex = new RegExp(
-				"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[=/()%ยง!@#$%^&*])(?=.{8,})"
-			),
+			"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[=/()%ยง!@#$%^&*])(?=.{8,})"
+		),
 			mediumRegex = new RegExp(
 				"^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
 			);

@@ -5,19 +5,21 @@
 <link href="{{ asset('css/groupe.css') }}" rel="stylesheet">
 @endsection
 
-@section('content')
-
-
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+@section('ShowMessage')
+@if(session()->has('message'))
+        <div class="alert showAlert close-message">
+            <span class="fas fa-exclamation-circle"></span>
+            <span class="msg">
+                {{ session()->get('message') }}
+            </span>
+            <div class="close-btn">
+                <span class="fas fa-times"></span>
+            </div>
         </div>
-    @endif
+@endif
+@endsection
 
+@section('content')
     
 <div class="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
   
@@ -36,33 +38,32 @@
         <div class="space-y-4 mt-3">
           {{-- Liste des groupes --}}
 	        @foreach($formsList as $forms)
-          <button class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+          <form action="{{ route('groupes.show', $forms->id) }}">
+          @csrf
+          <button type="submit" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
             <div class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
-              <img src=" {{ "img/defaut1.png" }} " class="w-7 h-7 mr-2 rounded-full" alt="profile">
+              <img src=" {{ $forms->logo }} " class="w-7 h-7 mr-2 rounded-full" alt="profile">
               {{ $forms->title }}
             </div>
             <div class="flex items-center w-full">
               <div class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md"> 
                 
                 
-
-@foreach($forms->usersGroupe as $user)
+<?php $compteurMembre=0; ?>
+@foreach($forms->usersGroupe as $userGroupe)
   @if($loop->first)
-    <b>membres : </b>
+    <b>membre(s) : </b>
   @endif
-  {{$user->firstname}}
-  @if(!$loop->last)
-    ;
-  @else
-    <br/>
-  @endif
+<?php $compteurMembre++ ?>
 @endforeach
-
+{{ $compteurMembre }}
 
                </div> <!-- count nbr membre -->
-              <div class="ml-auto text-xs text-gray-500"> {{ $forms->date }} </div>
+              <div class="ml-auto text-xs text-gray-500"> {{ strftime('%d/%m/%Y', strtotime($forms->date)) }} </div>
             </div>
+          </a>
           </button>
+          </form>
           @endforeach
         </div>
       </div>
@@ -90,120 +91,11 @@
         </div>
         <div class="sm:p-7 p-4">
 
-            <!-- Formulaire et Groupe : -->
-  <div class="bg-white border border-gray-200 w-full p-4 mb-4">
-    <div class="mb-4 GroupeInfo">
-        <div class="GroupeInfo-left">
-      <img style="border-radius: 20px;" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80">
-        </div>
-        <div class="GroupeInfo-right">
-      <h3 class="font-medium text-xl sm:text-2xl">Scalable customer service</h3>
-        <p class="mt-2 text-gray-500 text-sm sm:text-base">An all-in-one customer service platform that helps you balance everything your customers need to be happy.</p>
-     </div>
-    </div>
-    
-    <div class="text-gray-500 mt-2 text-sm sm:text-base">
-      Membre(s) du groupe :
-    </div>
-    
-    <div class="mt-2 flex items-center justify-between flex-wrap w-full">
-      <div>
-        <div class="flex -space-x-2 overflow-hidden">
-  <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-  <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-  <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="">
-  <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-</div>
-      </div>
-      <div class="sm:mt-0 mt-4 w-full sm:w-auto">
-        <button class="px-6 py-2 bg-green-500 text-white rounded w-full sm:w-auto">Ajouter un Membre</button>
-        <button class="px-6 py-2 bg-indigo-500 text-white rounded w-full sm:w-auto">Editer Groupe</button>
-        <button class="px-6 py-2 bg-red-500 text-white rounded w-full sm:w-auto">Supprimer Groupe</button>
-      </div>
-    </div>
-  </div>
-
-          <!-- Liste des membres :   -->
-          <table class="w-full text-left">
-            <thead>
-              <tr class="text-gray-400">
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800"></th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">Nom</th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">Prénom</th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">Email</th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">Role</th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800"></th>
-              </tr>
-            </thead>
-            <tbody class="text-gray-600 dark:text-gray-100">
-              <tr>
-                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 px-6 text-sm profile">
-                  {{-- <img src=" {{ $user->profile_photo_path }} "> --}}
-                  <img src=" https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80 ">
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800">
-                  <div class="flex items-center">
-                    Nom
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800">
-                  <div class="flex items-center">
-                    Prénom
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                  <div class="flex items-center">
-                    email@formeditor.com
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                  <div class="flex items-center">
-                    Role...
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-5 border-b border-gray-200 dark:border-gray-800 text-red-500">
-                  <form id="delete-user '$user->id' " class="inline-block" action=" ' route('admin.destroy', $user->id) ' " method="POST" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette utilisateur ?');">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" id="red" class="btn btn-sm btn-outline-danger mb-1 button-glow" value="Delete">Retirer membre du groupe</button>
-                  </form>
-                </td>
-              </tr>
-              <tr>
-                <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 px-6 text-sm profile">
-                  {{-- <img src=" {{ $user->profile_photo_path }} "> --}}
-                  <img src=" https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixqx=ITpzis0SHv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80 ">
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800">
-                  <div class="flex items-center">
-                    Nom
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800">
-                  <div class="flex items-center">
-                    Prénom
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                  <div class="flex items-center">
-                    email@formeditor.com
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-3 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                  <div class="flex items-center">
-                    Role...
-                  </div>
-                </td>
-                <td class="sm:p-3 py-2 px-5 border-b border-gray-200 dark:border-gray-800 text-red-500">
-                  <form id="delete-user '$user->id' " class="inline-block" action=" ' route('admin.destroy', $user->id) ' " method="POST" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette utilisateur ?');">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" id="red" class="btn btn-sm btn-outline-danger mb-1 button-glow" value="Delete">Retirer membre du groupe</button>
-                  </form>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          @hasSection('GroupeInfo')
+            @yield('GroupeInfo')
+          @else
+            <div>Veuillez sélectionner un formulaire pour pouvoir afficher toutes ses informations.</div>
+          @endif
           
         </div>
       </div>

@@ -43,3 +43,7 @@ Route::get('/action', [RechercheAjaxController::class, 'action'])->name('recherc
 // Groupe
 Route::resource('groupes', GroupeController::class)->middleware('auth');
 Route::middleware(['auth:sanctum', 'verified'])->get('/groupes', [GroupeController::class, 'index'])->name('groupe');
+
+//form builder Add member to groupe
+Route::get('groupes/{groupe}/create', [GroupeController::class, 'create'])->name('groupes.create');
+Route::post('groupes/{groupe}/addMember', [GroupeController::class, 'addMember'])->name('groupes.addMember');

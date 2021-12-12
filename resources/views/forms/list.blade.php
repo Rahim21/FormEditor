@@ -250,13 +250,28 @@ setTimeout(function () {
 					@else
 					<img src=" {{ $forms->user->profile_photo_path }} " alt="participant" id="participant">
           			@endif
+					<?php $compteurMembre=0;
+					$owner = $forms->user_id;
+					?>
+					@foreach($forms->usersGroupe as $userGroupe)
+						@if($userGroupe->id == $owner)
 
-					<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=900&amp;q=60" alt="participant" id="participant">
-					<button class="add-participant" style="color: {{ $forms->color }};">
-						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-							<path d="M12 5v14M5 12h14"></path>
-						</svg>
-					</button>
+						@else
+						<img src="{{ $userGroupe->profile_photo_path }}" alt="participant" id="participant">
+						@endif
+						<?php $compteurMembre++ ?>
+						
+					@endforeach
+					@if($compteurMembre<6)
+						@if(Gate::allows('form-access', $forms))
+							<a href="{{ route('groupes.create', $forms->id) }}" class="add-participant" style="color: {{ $forms->color }};">
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
+									<path d="M12 5v14M5 12h14"></path>
+								</svg>
+							</a>
+						@endif
+					@endif
+					
 				</div>
 				<div class="days-left" style="color: {{ $forms->color }};">
 					{{ strftime('%d/%m/%Y', strtotime($forms->date)) }}

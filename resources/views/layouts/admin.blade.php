@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/appJetStream.js') }}" defer></script>
+    <script src="{{ asset('js/auth.js') }}" defer></script>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -35,6 +36,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
 </head>
     <body class="font-sans antialiased">
+
+    <!-- ErrorMessageBanner -->
+    @yield('error')
+    @yield('ShowMessage')
+
+
+    
 <div class="app-container">
     <div class="app-header">
       <div class="app-header-left">
@@ -124,7 +132,7 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="bi bi-box-arrow-in-right"></i>
-                                        {{ __('Logout') }}
+                                        {{ __('Déconnexion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

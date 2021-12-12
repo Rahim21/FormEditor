@@ -31,6 +31,7 @@
         </div>
 
         <input form="form-builder" type="datetime-local" class="input-field mon-shadow @error('date') is-invalid @enderror" name="date" id="date" placeholder="Date" value="{{ old('date') }}"/>
+        <input form="form-builder" type="hidden" id="logo" name="logo" value="{{asset('img/groupe.png')}}">
     </div>
 
     <div class="formBuilder">

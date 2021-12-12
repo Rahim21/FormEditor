@@ -23,7 +23,7 @@ class AdminController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $usersList = User::orderBy('role_id', 'Asc')->paginate(20);
+        $usersList = User::orderBy('role_id', 'Asc')->get();
         return view('admin.list', ['usersList' => $usersList]);
     }
 

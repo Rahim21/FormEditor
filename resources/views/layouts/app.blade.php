@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/auth.js') }}" defer></script>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -39,6 +40,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+    <!-- ErrorMessageBanner -->
+    @yield('error')
+    @yield('ShowMessage')
+
 
         <div class="app-container">
     <div class="app-header">
@@ -137,7 +143,7 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="bi bi-box-arrow-in-right"></i>
-                                        {{ __('Logout') }}
+                                        {{ __('Déconnexion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -231,94 +237,38 @@ l78 50 -45 31 c-109 74 -268 139 -410 166 -96 18 -294 18 -394 0z"/>
           <p>Messagerie</p>
         </div>
         <div class="messages">
-          <div class="message-box">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="profile image">
-            <div class="message-content">
-              <div class="message-header">
-                <div class="name">Utilisateur 1</div>
-                <div class="star-checkbox">
-                  <input type="checkbox" id="star-1">
-                  <label for="star-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </label>
+          <?php $compteurGroupe=0;
+          $tabMessage = ["Bienvenue sur mon site ! 🥳","Chuck NORRIS est passé par là ! 👌", "Connaissez-vous l'incroyabe Chuck Norris","Salut ça va ?", "T'es dispo pour continuer sur le projet ?", "Incroyable ce projet ! ⭐❤️", "Tu peux modifier la partie entreprise du formulaire ?"];          
+          ?>
+          @foreach($formsList as $forms)
+					<?php $compteurGroupe++ ?>
+						
+            @if($compteurGroupe<=10)
+            <div class="message-box">
+              <img src="{{ $forms->logo }}" alt="profile image">
+              <div class="message-content">
+                <div class="message-header">
+                  <div class="name">{{ $forms->title }}</div>
+                  <div class="star-checkbox">
+                    <input type="checkbox" id="star-1">
+                    <label for="star-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                      </svg>
+                    </label>
+                  </div>
                 </div>
+                <p class="message-line">
+                <?=  $tabMessage[array_rand($tabMessage, 1)]; ?>
+                </p>
+                <p class="message-line time">
+                  {{ $forms->date}}
+                </p>
               </div>
-              <p class="message-line">
-                Bienvenue sur mon site ! 🥳
-              </p>
-              <p class="message-line time">
-                Dec, 12
-              </p>
             </div>
-          </div>
-          <div class="message-box">
-            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="profile image">
-            <div class="message-content">
-              <div class="message-header">
-                <div class="name">Utilisateur 2</div>
-                <div class="star-checkbox">
-                  <input type="checkbox" id="star-2">
-                  <label for="star-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </label>
-                </div>
-              </div>
-              <p class="message-line">
-                Salut
-              </p>
-              <p class="message-line time">
-                Dec, 12
-              </p>
-            </div>
-          </div>
-          <div class="message-box">
-            <img src="https://images.unsplash.com/photo-1543965170-4c01a586684e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDZ8fG1hbnxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="profile image">
-            <div class="message-content">
-              <div class="message-header">
-                <div class="name">Utilisateur 3</div>
-                <div class="star-checkbox">
-                  <input type="checkbox" id="star-3">
-                  <label for="star-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </label>
-                </div>
-              </div>
-              <p class="message-line">
-                t'es dispo pour faire le projet ce soir ?
-              </p>
-              <p class="message-line time">
-                Dec, 12
-              </p>
-            </div>
-          </div>
-          <div class="message-box">
-            <img src="https://images.unsplash.com/photo-1533993192821-2cce3a8267d1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFuJTIwbW9kZXJufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="profile image">
-            <div class="message-content">
-              <div class="message-header">
-                <div class="name">Utilisateur 4</div>
-                <div class="star-checkbox">
-                  <input type="checkbox" id="star-4">
-                  <label for="star-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </label>
-                </div>
-              </div>
-              <p class="message-line">
-                Incroyable ton projet !
-              </p>
-              <p class="message-line time">
-                Dec, 11
-              </p>
-            </div>
-          </div>
+            @endif
+          @endforeach
+          
         </div>
       </div>
     </div>

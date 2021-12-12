@@ -29,7 +29,8 @@ class StoreFormsRequest extends FormRequest
             'date' => ['required', 'date', 'before:tomorrow'],
             'color' => ['required', 'string', 'max:10'],
             'progress' => ['required', 'integer'],
-            'formulaire' => ['nullable']
+            'formulaire' => ['nullable'],
+            'logo' => ['nullable']
         ];
     }
 
@@ -41,7 +42,8 @@ class StoreFormsRequest extends FormRequest
             'date' => 'date',
             'color' => 'color',
             'progress' => 'progress',
-            'formulaire' => 'formulaire'
+            'formulaire' => 'formulaire',
+            'logo' => 'logo',
         ];
     }
 

@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/auth.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -36,6 +37,12 @@
 </head>
 
     <body class="font-sans antialiased">
+
+    <!-- ErrorMessageBanner -->
+    @yield('error')
+    @yield('ShowMessage')
+
+
 <div class="app-container">
     <div class="app-header">
       <div class="app-header-left">
@@ -122,7 +129,7 @@
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         <i class="bi bi-box-arrow-in-right"></i>
-                                        {{ __('Logout') }}
+                                        {{ __('Déconnexion') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
